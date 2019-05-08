@@ -44,8 +44,14 @@ app.get("/songs", (req, res) => {
 
 app.get("/songs/add", (req, res) => {
   const { name, artist } = req.query;
-  res.send("Adding Song");
-  console.log(name, artist);
+  const INSERT_SONGS_QUERY = `INSERT INTO songs(song_name, artist) VALUES ('${name}', '${artist}')`;
+  connection.query(INSERT_SONGS_QUERY, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.send("successfully added product");
+    }
+  });
 });
 
 app.listen(4000, () => {
