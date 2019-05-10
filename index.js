@@ -100,8 +100,8 @@ app.get("/createsong", (req, res) => {
 });
 
 app.get("/createsong/add", (req, res) => {
-  const { name, artist } = req.query;
-  const INSERT_SONGS_QUERY = `INSERT INTO songs(name, artist) VALUES ('${name}', '${artist}')`;
+  const { name, artist, album, ytlink } = req.query;
+  const INSERT_SONGS_QUERY = `INSERT INTO songs(name, artist, album, ytlink) VALUES ('${name}', '${artist}', '${album}', '${ytlink}')`;
   connection.query(INSERT_SONGS_QUERY, (err, results) => {
     if (err) {
       return res.send(err);

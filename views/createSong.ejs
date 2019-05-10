@@ -85,7 +85,7 @@
         <button
           type="button"
           class="btn btn-success"
-          onclick="window.location.href='/createsong/add?name=love&artist=stanley'"
+          onclick="window.location.href='/createsong/add?name=' +  document.getElementById('songNameTextField').value  + '&artist=' + document.getElementById('artistNameTextField').value + '&album=' + document.getElementById('albumNameTextField').value + '&ytlink=' + document.getElementById('ytlinkTextField').value "
         >
           Add Song
         </button>
