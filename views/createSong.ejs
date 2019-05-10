@@ -40,6 +40,8 @@
           <small id="helpId" class="form-text text-muted"
             >Enter the song name.</small
           >
+          <br />
+
           <label for="">Artist Name</label>
           <input
             type="text"
@@ -52,6 +54,21 @@
           <small id="helpId" class="form-text text-muted"
             >Enter the artist name for the song you are adding.</small
           >
+          <br />
+          <label for="">Album Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name=""
+            id="albumNameTextField"
+            aria-describedby="helpId"
+            placeholder="ex: 'Abbey Road'"
+          />
+          <small id="helpId" class="form-text text-muted"
+            >Enter the album name for the song you are adding.</small
+          >
+          <br />
+
           <label for="">YouTube Link</label>
           <input
             type="text"
@@ -65,6 +82,13 @@
             >Enter the YouTube link for the song to be streamed.</small
           >
         </div>
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="window.location.href='/createsong/add?name=love&artist=stanley'"
+        >
+          Add Song
+        </button>
       </form>
     </div>
 
