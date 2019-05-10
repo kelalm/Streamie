@@ -44,6 +44,16 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/managesongs", (req, res) => {
+  connection.query(SELECT_ALL_SONGS_QUERY, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      res.render("manageSongs.ejs", { obj: results });
+    }
+  });
+});
+
 app.get("/login", (req, res) => {
   // res.send(
   //   "Hello from the server... Go to /songs to see all songs available for streaming."
@@ -65,17 +75,21 @@ app.get("/login", (req, res) => {
 //   });
 // });
 
-app.get("/songs/add", (req, res) => {
-  const { name, artist } = req.query;
-  const INSERT_SONGS_QUERY = `INSERT INTO songs(song_name, artist) VALUES ('${name}', '${artist}')`;
-  connection.query(INSERT_SONGS_QUERY, (err, results) => {
-    if (err) {
-      return res.send(err);
-    } else {
-      return res.send("successfully added product");
-    }
-  });
+app.get("/createsong", (req, res) => {
+  res.render("createSong.ejs");
 });
+
+// app.get("/createsong/add", (req, res) => {
+//   const { name, artist } = req.query;
+//   const INSERT_SONGS_QUERY = `INSERT INTO songs(song_name, artist) VALUES ('${name}', '${artist}')`;
+//   connection.query(INSERT_SONGS_QUERY, (err, results) => {
+//     if (err) {
+//       return res.send(err);
+//     } else {
+//       return res.send("successfully added product");
+//     }
+//   });
+// });
 
 app.use(
   session({
@@ -99,7 +113,7 @@ app.post("/auth", function(request, response) {
         if (results.length > 0) {
           request.session.loggedin = true;
           request.session.username = username;
-          response.render("/admin.ejs");
+          response.render("admin.ejs");
         } else {
           response.send("Incorrect Username and/or Password!");
         }

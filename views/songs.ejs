@@ -19,20 +19,39 @@
     <%- include("partials/navbar.ejs") %>
   </head>
   <body onload="{retrieveSongs()}">
-    <h2>All songs</h2>
 
     <% console.log(locals.obj) %> <% console.log(locals.obj.length) %>
+    <div class="container">
+        <h2>Stream Songs</h2>
+        <p>Below are all of the songs. Click them to listen.</p>
+        <hr />
+  
+        <% console.log(locals.obj) %> <% console.log(locals.obj.length) %>
+  
+        <div class="list-group">
+  
+        <ul>
+          <% for(var i=0; i < locals.obj.length; i++) {%>
+              <a
+              href="#"
+              class="list-group-item list-group-item-action flex-column align-items-start"
+            >
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"> <%= locals.obj[i]['song_name'] %></h5>
+                <small> id: <%= locals.obj[i]['song_length'] %></small>
+              </div>
+              <p class="mb-1">
+                  <%= locals.obj[i]['artist'] %>
+              </p>
+              <small> <%= locals.obj[i]['yt_link'] %></small>
 
-    <ul>
-      <% for(var i=0; i < locals.obj.length; i++) {%>
-      <p>Song:</p>
-      <li><%= locals.obj[i]['song_name'] %></li>
-      <li><%= locals.obj[i]['artist'] %></li>
-      <li><%= locals.obj[i]['song_length'] %></li>
-      <li><%= locals.obj[i]['album'] %></li>
 
-      <% } %>
-    </ul>
+            </a>
+          <% } %>
+  
+          </div>
+        </ul>
+      </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

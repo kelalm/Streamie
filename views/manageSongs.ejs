@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Streamie Admin</title>
+    <title>Streamie</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -16,12 +16,46 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-
     <%- include("partials/adminnavbar.ejs") %>
   </head>
-  <body>
-    <h2>Welcome Administrator</h2>
-    <p>As an artist, you may create, update, and delete new songs.</p>
+  <body onload="{retrieveSongs()}">
+    <div class="container">
+      <h2>Manage All Songs</h2>
+      <p>Below are all of the songs. Click them to listen.</p>
+      <hr />
+
+      <% console.log(locals.obj) %> <% console.log(locals.obj.length) %>
+
+      <div class="list-group">
+
+      <ul>
+        <% for(var i=0; i < locals.obj.length; i++) {%>
+            <a
+            href="#"
+            class="list-group-item list-group-item-action flex-column align-items-start"
+          >
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"> <%= locals.obj[i]['song_name'] %></h5>
+              <small> id: <%= locals.obj[i]['song_id'] %></small>
+            </div>
+            <p class="mb-1">
+                <%= locals.obj[i]['artist'] %>
+            </p>
+            <small> <%= locals.obj[i]['yt_link'] %></small>
+
+          </a>
+          <button type="button" class="btn btn-warning">Edit Song</button>
+          <button type="button" class="btn btn-danger">Delete Song</button>
+          
+          <br>
+
+          <hr/>
+
+        <% } %>
+
+        </div>
+      </ul>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -41,4 +75,5 @@
       crossorigin="anonymous"
     ></script>
   </body>
+  <script type="text/javascript" src="/js/songsHandler.js"></script>
 </html>
