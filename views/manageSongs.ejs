@@ -18,7 +18,7 @@
     />
     <%- include("partials/adminnavbar.ejs") %>
   </head>
-  <body onload="{retrieveSongs()}">
+  <body>
     <div class="container">
       <h2>Manage All Songs</h2>
       <p>Below are all of the songs. Click them to listen.</p>
@@ -47,19 +47,14 @@
             <small> <%= locals.obj[i]['ytlink'] %></small>
 
           </a>
-          <button id = <%= locals.obj[i]['songid'] %> type="button" class="btn btn-warning" data-toggle= "modal" data-target= "#myModal">Edit Song</button>
+          <button id = <%= locals.obj[i]['songid'] %> type="button" class="btn btn-warning" data-toggle= "modal" data-target= "#myModal" onclick="{passEditId(this.id)}">Edit Song</button>
           <button id = <%= locals.obj[i]['songid'] %> type="button" class="btn btn-danger" onclick="window.location.href='/managesongs/delete?songid=' + this.id">Delete Song</button>
           
           <br>
 
           <hr/>
 
-        <% } %>
-
-        </div>
-      </ul>
-
-       <!-- The Modal -->
+          <!-- The Modal -->
        <div class="modal fade" id="myModal">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -125,9 +120,23 @@
                         />
                         <small id="helpId" class="form-text text-muted"
                             >Edit the current album name.</small>
-                          </div>                  
+                    </div>                  
                     
                     
+                    <div class="form-group">
+                            <label>Current YouTube Link :</label>
+                            <label for="" id="oldLink"></label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name=""
+                                id="ytlinkField"
+                                aria-describedby="helpId"
+                                placeholder="New Link Text"
+                            />
+                        <small id="helpId" class="form-text text-muted"
+                            >Edit the current YouTube link.</small>
+                    </div>     
     
                     <div
                       id="addedStudent"
@@ -156,8 +165,7 @@
                     class="btn btn-primary"
                     data-dismiss="modal"
                     name="applyChangesButton"
-                    id=""
-                    onclick="applyChangesPressed(this.id)"
+                    onclick="window.location.href='/managesongs/edit?name=' +  document.getElementById('songField').value  + '&artist=' + document.getElementById('artistField').value + '&album=' + document.getElementById('albumField').value + '&ytlink=' + document.getElementById('ytlinkField').value + '&songid=' + document.getElementsByName('applyChangesButton')[0].id"
                   >
                     Apply Changes
                   </button>
@@ -168,6 +176,13 @@
               </div>
             </div>
           </div>
+
+        <% } %>
+
+        </div>
+      </ul>
+
+       
     
     </div>
 
@@ -189,5 +204,5 @@
       crossorigin="anonymous"
     ></script>
   </body>
-  <script type="text/javascript" src="/js/songsHandler.js"></script>
+  <script type="text/javascript" src="/js/scripts.js"></script>
 </html>

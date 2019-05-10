@@ -54,6 +54,25 @@ app.get("/managesongs", (req, res) => {
   });
 });
 
+app.get("/managesongs/edit", (req, res) => {
+  const { name, artist, album, ytlink, songid } = req.query;
+
+  const UPDATE_SONGS_QUERY = `UPDATE songs SET name = '${name}', artist = '${artist}', album = '${album}', ytlink = '${ytlink}' WHERE songid = '${songid}'`;
+  connection.query(UPDATE_SONGS_QUERY, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      connection.query(SELECT_ALL_SONGS_QUERY, (err, results) => {
+        if (err) {
+          return res.send(err);
+        } else {
+          res.render("manageSongs.ejs", { obj: results });
+        }
+      });
+    }
+  });
+});
+
 app.get("/managesongs/delete", (req, res) => {
   const { songid } = req.query;
 

@@ -18,7 +18,7 @@
     />
     <%- include("partials/navbar.ejs") %>
   </head>
-  <body onload="{retrieveSongs()}">
+  <body>
 
     <% console.log(locals.obj) %> <% console.log(locals.obj.length) %>
     <div class="container">
@@ -33,7 +33,7 @@
         <ul>
           <% for(var i=0; i < locals.obj.length; i++) {%>
               <a
-              href="#"
+              href="<%= locals.obj[i]['ytlink'] %>"
               class="list-group-item list-group-item-action flex-column align-items-start"
             >
               <div class="d-flex w-100 justify-content-between">
